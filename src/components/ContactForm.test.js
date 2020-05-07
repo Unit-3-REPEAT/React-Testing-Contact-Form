@@ -14,7 +14,7 @@ test("Check if ContactForm renders without crashing", () => {
 test('All the inputs are in the document', () => {
 
     //ARRANGE
-    const {getByPlaceholderText, getByLabelText, getElementById} = render(<ContactForm />)
+    const {getByPlaceholderText, getByLabelText, getByTestId} = render(<ContactForm />)
 
     //ACT
     //grab with getByPlaceholderText
@@ -24,7 +24,7 @@ test('All the inputs are in the document', () => {
     //grab with getByLabelText
     const emailInput = getByLabelText(/email/i);
     const messageInput = getByLabelText(/message/i);
-    const submitButton = getElementById(/submit/i);
+    
 
     //ASSERT
     expect(firstNameInput).toBeInTheDocument();
@@ -34,12 +34,12 @@ test('All the inputs are in the document', () => {
     
 
     //types into input      
-    fireEvent.change(firstNameInput, {target: {value: "Dino" }});
+    fireEvent.change(firstNameInput, {target: {value: "Dio" }});    
     fireEvent.change(lastNameInput, {target: {value: 'Muratovic'}});
     fireEvent.change(emailInput, {target: {value: 'dinodino@yahoo.com'}});
     fireEvent.change(messageInput, {target: {value: 'Test test the message text area'}});    
 
     //clicks the button
     
-    fireEvent.click(submitButton);
+    fireEvent.click(getByTestId(/submit/i));
  });
